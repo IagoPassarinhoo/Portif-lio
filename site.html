@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bahia Securty — produtos e soluções em segurança eletrônica.">
+  <title>Bahia Securty | Segurança Eletrônica</title>
+  <style>
+    :root {
+      --navy: #071b33;
+      --navy2: #0d2b4d;
+      --blue: #0877d1;
+      --cyan: #19b8d4;
+      --light: #f3f7fb;
+      --text: #172536;
+      --muted: #667789;
+      --white: #fff;
+      --radius: 16px;
+      --shadow: 0 12px 35px rgba(7,27,51,.10);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: var(--text); background: var(--white); }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; }
+    .topbar { background: #041326; color: #dbe8f5; padding: 9px 5%; font-size: 13px; display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    header { background: var(--navy); color: white; position: sticky; top: 0; z-index: 20; box-shadow: 0 5px 18px #00152b30; }
+    .nav { max-width: 1180px; margin:auto; padding: 17px 22px; display:flex; align-items:center; justify-content:space-between; gap:22px; }
+    .brand { display:flex; align-items:center; gap:11px; font-size:22px; font-weight:800; letter-spacing:.4px; }
+    .brand-mark { width:42px; height:42px; display:grid; place-items:center; border-radius:12px; color:white; background:linear-gradient(140deg,var(--blue),var(--cyan)); font-size:22px; }
+    .brand span small { display:block; font-size:10px; letter-spacing:2.2px; color:#9db8d1; margin-top:3px; }
+    .nav-links { display:flex; align-items:center; gap:25px; font-size:14px; color:#e3edf7; }
+    .nav-links a:hover { color:#5edaf0; }
+    .cart-btn { border:1px solid #ffffff50; color:white; background:#ffffff12; border-radius:999px; padding:10px 15px; }
+    .hero { color:white; background:radial-gradient(circle at 80% 25%,#12669a 0,transparent 34%),linear-gradient(115deg,#06182d,#0d355a 70%,#0877a8); overflow:hidden; }
+    .hero-inner { max-width:1180px; margin:auto; padding:78px 22px 85px; display:grid; grid-template-columns:1.15fr .85fr; gap:40px; align-items:center; }
+    .eyebrow { color:#63d9ed; font-weight:700; font-size:12px; letter-spacing:2px; text-transform:uppercase; }
+    h1 { font-size:clamp(36px,5vw,58px); line-height:1.05; margin:17px 0; letter-spacing:-1.6px; }
+    .hero p { color:#d3e2f0; line-height:1.7; font-size:17px; max-width:570px; }
+    .actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:27px; }
+    .btn { display:inline-flex; justify-content:center; align-items:center; padding:14px 20px; border-radius:9px; font-weight:700; border:0; transition:.2s; }
+    .btn-primary { color:white; background:linear-gradient(100deg,var(--blue),var(--cyan)); }
+    .btn-primary:hover { transform:translateY(-2px); filter:brightness(1.08); }
+    .btn-outline { border:1px solid #ffffff70; color:white; background:#ffffff0d; }
+    .hero-art { min-height:290px; display:grid; place-items:center; position:relative; }
+    .shield { width:min(300px,75vw); aspect-ratio:1; border-radius:42% 42% 48% 48%; background:linear-gradient(145deg,#ffffff20,#ffffff08); border:1px solid #ffffff35; display:grid; place-items:center; box-shadow:0 0 75px #15c3e344; transform:rotate(-5deg); }
+    .shield-inner { width:72%; height:72%; border:2px solid #65dff1; border-radius:38% 38% 48% 48%; display:grid; place-items:center; color:#7ce9f5; font-size:100px; text-shadow:0 0 25px #2bd9f5; }
+    .hero-tag { position:absolute; bottom:8px; right:0; background:white; color:var(--navy); padding:13px 17px; border-radius:12px; box-shadow:var(--shadow); font-weight:700; }
+    section { padding:72px 22px; }
+    .container { max-width:1180px; margin:auto; }
+    .section-head { text-align:center; margin-bottom:35px; }
+    .section-head .eyebrow { color:var(--blue); }
+    h2 { font-size:clamp(27px,3vw,37px); color:var(--navy); margin:10px 0; }
+    .section-head p { color:var(--muted); line-height:1.6; margin:0 auto; max-width:650px; }
+    .benefits { background:var(--light); }
+    .benefit-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .benefit { background:white; padding:25px; border-radius:var(--radius); box-shadow:var(--shadow); }
+    .benefit .ico { font-size:28px; }
+    .benefit h3 { color:var(--navy); margin:13px 0 8px; }
+    .benefit p { color:var(--muted); line-height:1.6; margin:0; font-size:14px; }
+    .filters { display:flex; justify-content:center; flex-wrap:wrap; gap:9px; margin-bottom:25px; }
+    .filter { border:1px solid #d9e3ec; border-radius:99px; padding:9px 15px; background:white; color:#45596d; }
+    .filter.active,.filter:hover { background:var(--navy); color:white; border-color:var(--navy); }
+    .products { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    .product { border:1px solid #e4ebf2; border-radius:var(--radius); overflow:hidden; background:white; box-shadow:0 7px 24px #0b2c4b0b; display:flex; flex-direction:column; }
+    .product-visual { height:175px; display:grid; place-items:center; background:linear-gradient(145deg,#edf5fb,#dcebf6); font-size:70px; }
+    .product-info { padding:19px; display:flex; flex-direction:column; flex:1; }
+    .tag { color:var(--blue); font-size:11px; font-weight:800; letter-spacing:1px; text-transform:uppercase; }
+    .product h3 { color:var(--navy); margin:8px 0; font-size:18px; }
+    .product p { color:var(--muted); line-height:1.5; font-size:13px; margin:0 0 18px; flex:1; }
+    .product-bottom { display:flex; justify-content:space-between; align-items:center; gap:10px; }
+    .price { font-weight:800; color:var(--navy); font-size:17px; }
+    .add { background:var(--blue); color:white; border:0; padding:10px 13px; border-radius:8px; font-size:13px; font-weight:700; }
+    .add:hover { background:var(--navy); }
+    .about { background:var(--navy); color:white; }
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:45px; align-items:center; }
+    .about h2 { color:white; }
+    .about p { color:#c4d5e5; line-height:1.8; }
+    .about-panel { border:1px solid #ffffff2b; border-radius:var(--radius); padding:28px; background:#ffffff0b; }
+    .about-panel strong { color:#63d9ed; font-size:30px; display:block; margin-bottom:8px; }
+    .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:30px; }
+    .contact-card { background:var(--light); border-radius:var(--radius); padding:25px; }
+    .contact-card h3 { color:var(--navy); margin-top:0; }
+    .contact-card p { color:var(--muted); line-height:1.7; }
+    .contact-form { display:grid; gap:12px; }
+    .contact-form input,.contact-form textarea { width:100%; border:1px solid #d8e2eb; border-radius:9px; padding:13px; font:inherit; background:white; }
+    .contact-form textarea { min-height:110px; resize:vertical; }
+    footer { background:#041326; color:#aebfd0; padding:25px 22px; text-align:center; font-size:13px; }
+    .cart-count { display:inline-grid; place-items:center; background:var(--cyan); color:#04223c; width:20px; height:20px; border-radius:50%; font-size:11px; font-weight:800; margin-left:5px; }
+    .notice { color:var(--muted); font-size:12px; text-align:center; margin-top:18px; }
+    @media(max-width:800px) {
+      .hero-inner,.about-grid,.contact-grid { grid-template-columns:1fr; }
+      .hero-inner { padding-top:55px; }
+      .hero-art { min-height:240px; }
+      .products { grid-template-columns:repeat(2,1fr); }
+      .benefit-grid { grid-template-columns:1fr; }
+      .nav-links { display:none; }
+    }
+    @media(max-width:520px) {
+      .products { grid-template-columns:1fr; }
+      .topbar { justify-content:center; text-align:center; }
+      .brand { font-size:18px; }
+      .cart-btn { padding:9px 11px; font-size:12px; }
+      section { padding:55px 17px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <span>🛡️ Soluções em segurança eletrônica</span>
+    <span>Atendimento em Eunápolis e Região</span>
+  </div>
+  <header>
+    <nav class="nav">
+      <a class="brand" href="#inicio">
+        <span class="brand-mark">⌑</span>
+        <span>BAHIA SECURITYBR<small>SEGURANÇA ELETRÔNICA</small></span>
+      </a>
+      <div class="nav-links">
+        <a href="#inicio">Início</a><a href="#produtos">Produtos</a><a href="#sobre">Sobre</a><a href="#contato">Contato</a>
+      </div>
+      <button class="cart-btn" onclick="sendOrder()">Meu orçamento <span class="cart-count" id="cartCount">0</span></button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-inner">
+        <div>
+          <div class="eyebrow">Proteção para o que importa</div>
+          <h1>Segurança e tecnologia para sua tranquilidade.</h1>
+          <p>Encontre equipamentos de segurança eletrônica para sua casa, empresa ou condomínio. Monte sua lista e solicite um orçamento pelo WhatsApp.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#produtos">Ver produtos</a>
+            <a class="btn btn-outline" href="#contato">Fale conosco</a>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="shield"><div class="shield-inner">⬡</div></div>
+          <div class="hero-tag">Sua segurança em boas mãos</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="benefits">
+      <div class="container">
+        <div class="section-head"><div class="eyebrow">Bahia Securty</div><h2>Proteção do jeito que você precisa</h2><p>Equipamentos e soluções para deixar seu patrimônio mais seguro.</p></div>
+        <div class="benefit-grid">
+          <article class="benefit"><div class="ico">📹</div><h3>Monitoramento</h3><p>Câmeras e gravadores para acompanhar os ambientes com mais tranquilidade.</p></article>
+          <article class="benefit"><div class="ico">🚨</div><h3>Alarmes e sensores</h3><p>Produtos para ajudar a detectar situações suspeitas e reforçar a proteção.</p></article>
+          <article class="benefit"><div class="ico">🔐</div><h3>Controle de acesso</h3><p>Opções para organizar e controlar a entrada em residências e empresas.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="produtos">
+      <div class="container">
+        <div class="section-head"><div class="eyebrow">Nossa loja</div><h2>Produtos em destaque</h2><p>Adicione os itens à sua lista e solicite um orçamento personalizado.</p></div>
+        <div class="filters">
+          <button class="filter active" onclick="filterProducts('todos',this)">Todos</button>
+          <button class="filter" onclick="filterProducts('cameras',this)">Câmeras</button>
+          <button class="filter" onclick="filterProducts('gravadores',this)">Gravadores</button>
+          <button class="filter" onclick="filterProducts('acessorios',this)">Acessórios</button>
+          <button class="filter" onclick="filterProducts('alarmes',this)">Alarmes</button>
+        </div>
+        <div class="products" id="productGrid">
+          <article class="product" data-category="cameras">
+            <div class="product-visual">📷</div><div class="product-info"><span class="tag">Câmeras</span><h3>Câmera de segurança Full HD</h3><p>Câmera para monitoramento de ambientes internos ou externos. Consulte modelos disponíveis.</p><div class="product-bottom"><span class="price">Sob consulta</span><button class="add" onclick="addToCart('Câmera de segurança Full HD')">Adicionar +</button></div></div>
+          </article>
+          <article class="product" data-category="gravadores">
+            <div class="product-visual">📼</div><div class="product-info"><span class="tag">Gravadores</span><h3>DVR / NVR</h3><p>Gravadores para sistemas de CFTV analógicos ou IP. Consulte quantidade de canais.</p><div class="product-bottom"><span class="price">Sob consulta</span><button class="add" onclick="addToCart('DVR / NVR')">Adicionar +</button></div></div>
+          </article>
+          <article class="product" data-category="acessorios">
+            <div class="product-visual">💾</div><div class="product-info"><span class="tag">Acessórios</span><h3>HD para CFTV</h3><p>Armazenamento desenvolvido para uso em sistemas de gravação de segurança.</p><div class="product-bottom"><span class="price">Sob consulta</span><button class="add" onclick="addToCart('HD para CFTV')">Adicionar +</button></div></div>
+          </article>
+          <article class="product" data-category="alarmes">
+            <div class="product-visual">🚨</div><div class="product-info"><span class="tag">Alarmes</span><h3>Central de alarme</h3><p>Solução para gerenciamento de sensores e proteção de ambientes.</p><div class="product-bottom"><span class="price">Sob consulta</span><button class="add" onclick="addToCart('Central de alarme')">Adicionar +</button></div></div>
+          </article>
+          <article class="product" data-category="acessorios">
+            <div class="product-visual">🔌</div><div class="product-info"><span class="tag">Acessórios</span><h3>Fontes e conectores</h3><p>Acessórios para alimentação e instalação de equipamentos de segurança.</p><div class="product-bottom"><span class="price">Sob consulta</span><button class="add" onclick="addToCart('Fontes e conectores')">Adicionar +</button></div></div>
+          </article>
+          <article class="product" data-category="cameras">
+            <div class="product-visual">🌐</div><div class="product-info"><span class="tag">Câmeras</span><h3>Câmera IP / Wi-Fi</h3><p>Opções de monitoramento em rede para diferentes tipos de projetos.</p><div class="product-bottom"><span class="price">Sob consulta</span><button class="add" onclick="addToCart('Câmera IP / Wi-Fi')">Adicionar +</button></div></div>
+          </article>
+        </div>
+        <p class="notice">Os produtos e valores desta página são exemplos. Atualize conforme seu estoque e fornecedores.</p>
+      </div>
+    </section>
+
+    <section class="about" id="sobre">
+      <div class="container about-grid">
+        <div><div class="eyebrow">Quem somos</div><h2>Bahia SecurtyBR: confiança para proteger seu patrimônio.</h2><p>Trabalhamos com produtos e soluções de segurança eletrônica para residências, comércios e empresas. Nosso objetivo é ajudar você a encontrar os equipamentos certos para cada necessidade.</p><p>Personalize este texto com a história, os diferenciais e as regiões atendidas pela sua empresa.</p></div>
+        <div class="about-panel"><strong>Atendimento personalizado</strong><p>Conte para nossa equipe o que você precisa. Vamos ajudar a montar uma solução de acordo com seu ambiente e seu orçamento.</p><a class="btn btn-primary" href="#contato">Solicitar atendimento</a></div>
+      </div>
+    </section>
+
+    <section id="contato">
+      <div class="container">
+        <div class="section-head"><div class="eyebrow">Fale com a gente</div><h2>Solicite seu orçamento</h2><p>Preencha seus dados e envie sua solicitação diretamente pelo WhatsApp.</p></div>
+        <div class="contact-grid"
+          <div class="contact-card"><h3>📲 Atendimento</h3><p><strong>WhatsApp:</strong> (73) 99801-4605<br><s</strong> Eunápolis - Porto-Seguro - Teixeira de Freitas - Itabela <br><strong>Empresa:</strong> Bahia SecurtyBR</p><p>Eunápolis-Ba (55)73 9 9801-4605</p></div>
+          <form class="contact-card contact-form" onsubmit="sendContact(event)">
+            <input id="customerName" placeholder="Seu nome" required>
+            <input id="customerPhone" placeholder="Seu telefone" required>
+            <textarea id="customerMessage" placeholder="Qual produto ou solução você procura?" required></textarea>
+            <button class="btn btn-primary" type="submit">Enviar pelo WhatsApp</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>© <span id="year"></span> Bahia Securty — Segurança Eletrônica. Todos os direitos reservados.</footer>
+
+  <script>
+    // IMPORTANTE: troque pelo WhatsApp da empresa com código do país e DDD.
+    // Exemplo: 5577999999999 (55 + DDD + número, sem espaços ou símbolos).
+    const WHATSAPP_NUMBER = "5573998014605";
+    const cart = [];
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function addToCart(product) {
+      cart.push(product);
+      document.getElementById("cartCount").textContent = cart.length;
+      alert(product + " foi adicionado à sua lista de orçamento.");
+    }
+
+    function sendOrder() {
+      if (!cart.length) {
+        alert("Sua lista está vazia. Adicione algum produto primeiro.");
+        document.getElementById("produtos").scrollIntoView({behavior:"smooth"});
+        return;
+      }
+      const list = cart.map((item, index) => `${index + 1}. ${item}`).join("\\n");
+      const message = `Olá! Gostaria de solicitar um orçamento com a Bahia Securty:\\n\\n${list}`;
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank");
+    }
+
+    function sendContact(event) {
+      event.preventDefault();
+      const name = document.getElementById("customerName").value.trim();
+      const phone = document.getElementById("customerPhone").value.trim();
+      const message = document.getElementById("customerMessage").value.trim();
+      const text = `Olá, Bahia Securty!\\nMeu nome: ${name}\\nMeu telefone: ${phone}\\nSolicitação: ${message}`;
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, "_blank");
+    }
+
+    function filterProducts(category, button) {
+      document.querySelectorAll(".filter").forEach(item => item.classList.remove("active"));
+      button.classList.add("active");
+      document.querySelectorAll(".product").forEach(product => {
+        product.style.display = category === "todos" || product.dataset.category === category ? "flex" : "none";
+      });
+    }
+  </script>
+</body>
+</html>
